@@ -3,5 +3,6 @@
     <Style x:Key="CardStyle" TargetType="Border">
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="Padding" Value="5" />
     </Style>
 </ResourceDictionary>

@@ -3,26 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TodoWpfApp.Views"
              xmlns:viewModels="clr-namespace:TodoWpfApp.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type viewModels:TodoItemViewModel}}">
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Theme.xaml" />
-
-                <ResourceDictionary>
-                    <Style x:Key="StrikethroughOnDone" TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsDone}" Value="True">
-                                <Setter Property="TextDecorations" Value="Strikethrough" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="StrikethroughOnDone" TargetType="TextBlock">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsDone}" Value="True">
+                        <Setter Property="TextDecorations" Value="Strikethrough" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -30,7 +23,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" 
@@ -46,10 +39,13 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" 
-                           Text="{Binding DueBy, StringFormat='Due by: {0:dd/MM/yyyy HH:mm}'}"
+                           Text="{Binding DueBy, StringFormat='Due by: {0:dd/MM/yyyy}'}"
                            Style="{StaticResource StrikethroughOnDone}" />
 
-                <Button Grid.Column="1" Content="Mark as done" Command="{Binding MarkAsDoneCommand}">
+                <Button Content="Mark as done" 
+                        Command="{Binding MarkAsDoneCommand}"
+                        Padding="5, 0"
+                        Grid.Column="1">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Style.Triggers>

@@ -8,11 +8,36 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewModels:ControllerViewModel}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <CollectionViewSource x:Key="TodoItemsCollection" 
+                                  Source="{Binding Path=TodoItems}" />
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        <ItemsControl ItemsSource="{Binding TodoItems}">
+        <ItemsControl>
+            <ItemsControl.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{Binding Source={StaticResource TodoItemsCollection}}"/>
+
+                    <views:NewTodoItemView Width="300" 
+                                           Height="200"
+                                           Margin="5"/>
+                </CompositeCollection>
+            </ItemsControl.ItemsSource>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <views:TodoItemView Width="300" Height="200" />
+                    <views:TodoItemView Width="300" 
+                                        Height="200"
+                                        Margin="5" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

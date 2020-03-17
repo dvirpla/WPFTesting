@@ -58,6 +58,9 @@
     <Compile Include="Resources\DelegateCommand.cs" />
     <Compile Include="ViewModels\ControllerViewModel.cs" />
     <Compile Include="ViewModels\TodoItemViewModel.cs" />
+    <Compile Include="Views\NewTodoItemView.xaml.cs">
+      <DependentUpon>NewTodoItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TodoItemView.xaml.cs">
       <DependentUpon>TodoItemView.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewTodoItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
