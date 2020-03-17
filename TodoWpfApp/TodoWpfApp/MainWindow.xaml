@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:TodoWpfApp.Views"
         xmlns:viewModels="clr-namespace:TodoWpfApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="TodoWpfApp" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewModels:ControllerViewModel}">
     <Window.Resources>
         <ResourceDictionary>
@@ -16,7 +16,7 @@
     </Window.Resources>
 
     <Grid>
-        <ItemsControl>
+        <ItemsControl x:Name="TodoItemsControl">
             <ItemsControl.ItemsSource>
                 <CompositeCollection>
                     <CollectionContainer Collection="{Binding Source={StaticResource TodoItemsCollection}}"/>
