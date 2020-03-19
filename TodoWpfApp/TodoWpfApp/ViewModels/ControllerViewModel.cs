@@ -12,7 +12,7 @@ namespace TodoWpfApp.ViewModels
     {
         public static string[] TodoTypes = {
             "House Chores",
-            "Sports and Health",
+            "Health and Sports",
             "Work"
         };
 
