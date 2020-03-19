@@ -4,12 +4,31 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TodoWpfApp.Resources;
+using TodoWpfApp.Views;
 
 namespace TodoWpfApp.ViewModels
 {
     public class ControllerViewModel : INotifyPropertyChanged
     {
+        public static string[] TodoTypes = {
+            "House Chores",
+            "Sports and Health",
+            "Work"
+        };
+
         public ObservableCollection<TodoItemViewModel> TodoItems { get; }
+
+        private string _newSelectedTodoType = TodoTypes[0];
+
+        public string NewSelectedTodoType
+        {
+            get => this._newSelectedTodoType;
+            set
+            {
+                this._newSelectedTodoType = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         private string _newDescription;
 
@@ -37,10 +56,18 @@ namespace TodoWpfApp.ViewModels
 
         public ICommand AddNewTodoItemCommand => new DelegateCommand(_ =>
         {
-            this.TodoItems.Add(new TodoItemViewModel(this.NewDescription, this.NewDate));
+            this.TodoItems.Add(new TodoItemViewModel(this.NewSelectedTodoType, this.NewDescription, this.NewDate));
 
+            this.NewSelectedTodoType = TodoTypes[0];
             this.NewDescription = "";
             this.NewDate = DateTime.Now;
+        });
+
+
+        public ICommand NewTodoItemDialogCommand => new DelegateCommand(_ =>
+        {
+            var dialog = new NewTodoItemDialog(this);
+            dialog.ShowDialog();
         });
 
         public ControllerViewModel()
@@ -52,7 +79,7 @@ namespace TodoWpfApp.ViewModels
 
             // For test purposes:
             this.TodoItems.Add(
-                new TodoItemViewModel("Test", DateTime.Now.AddDays(1))
+                new TodoItemViewModel( TodoTypes[0], "Test", DateTime.Now.AddDays(1))
             );
         }
 

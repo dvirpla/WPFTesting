@@ -12,6 +12,8 @@ namespace TodoWpfApp.ViewModels
 {
     public class TodoItemViewModel : INotifyPropertyChanged
     {
+        public string TodoType { get; set; }
+
         public string Description { get; set; }
 
         public DateTime DueBy { get; set; }
@@ -31,8 +33,9 @@ namespace TodoWpfApp.ViewModels
 
         public ICommand MarkAsDoneCommand => new DelegateCommand(_ => { this.IsDone = true; });
 
-        public TodoItemViewModel(string description, DateTime dueBy)
+        public TodoItemViewModel(string todoType, string description, DateTime dueBy)
         {
+            this.TodoType = todoType;
             this.Description = description;
             this.DueBy = dueBy;
         }

@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TodoWpfApp.Views"
              xmlns:viewModels="clr-namespace:TodoWpfApp.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewModels:ControllerViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:ControllerViewModel}"
+             FocusManager.FocusedElement="{Binding ElementName=TodoTypeSelector}"
+             Loaded="NewTodoItemView_OnLoaded">
     <Border Style="{StaticResource CardStyle}">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -21,28 +23,43 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Description:"
+            <TextBlock Text="Category:"
                        VerticalAlignment="Center"
                        Grid.Row="0"
                        Grid.Column="0" />
 
-            <TextBox Text="{Binding NewDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     VerticalAlignment="Center"
-                     Grid.Row="0"
-                     Grid.Column="1" />
+            <ComboBox x:Name="TodoTypeSelector" 
+                      Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="5"
+                      ItemsSource="{x:Static viewModels:ControllerViewModel.TodoTypes}"
+                      SelectedItem="{Binding NewSelectedTodoType}" />
 
-            <TextBlock Text="Due By:"
+            <TextBlock Text="Description:"
                        VerticalAlignment="Center"
                        Grid.Row="1"
                        Grid.Column="0" />
 
+            <TextBox Text="{Binding NewDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalAlignment="Center"
+                     Margin="5"
+                     Grid.Row="1"
+                     Grid.Column="1" />
+
+            <TextBlock Text="Due By:"
+                       VerticalAlignment="Center"
+                       Grid.Row="2"
+                       Grid.Column="0" />
+
             <DatePicker SelectedDate="{Binding NewDate, Mode=TwoWay}"
-                        Grid.Row="1"
+                        Margin="5"
+                        Grid.Row="2"
                         Grid.Column="1" />
 
             <Button Content="Add"
+                    IsDefault="True"
                     Grid.ColumnSpan="2"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Grid.Column="0"
                     VerticalAlignment="Bottom"
                     Command="{Binding AddNewTodoItemCommand}">

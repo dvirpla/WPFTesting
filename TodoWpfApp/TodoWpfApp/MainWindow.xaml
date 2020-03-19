@@ -16,17 +16,21 @@
     </Window.Resources>
 
     <Grid>
-        <ItemsControl x:Name="TodoItemsControl">
-            <ItemsControl.ItemsSource>
-                <CompositeCollection>
-                    <CollectionContainer Collection="{Binding Source={StaticResource TodoItemsCollection}}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-                    <views:NewTodoItemView Width="300" 
-                                           Height="200"
-                                           Margin="5"/>
-                </CompositeCollection>
-            </ItemsControl.ItemsSource>
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Todo"
+                          Command="{Binding NewTodoItemDialogCommand}"/>
+            </MenuItem>
+        </Menu>
 
+        <ItemsControl x:Name="TodoItemsControl"
+                      Grid.Row="1"
+                      ItemsSource="{Binding TodoItems}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />

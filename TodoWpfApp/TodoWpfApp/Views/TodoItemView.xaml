@@ -26,11 +26,17 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" 
-                       Text="{Binding Description}" 
-                       TextWrapping="Wrap"
-                       FontSize="18" 
-                       Style="{StaticResource StrikethroughOnDone}" />
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="{Binding Description}" 
+                           TextWrapping="Wrap"
+                           FontSize="18" 
+                           Style="{StaticResource StrikethroughOnDone}" />
+
+                <TextBlock Text="{Binding TodoType}"
+                           TextWrapping="Wrap"
+                           FontSize="11"
+                           Style="{StaticResource StrikethroughOnDone}" />
+            </StackPanel>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

@@ -10,24 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TodoWpfApp.ViewModels;
 
 namespace TodoWpfApp.Views
 {
     /// <summary>
-    /// Interaction logic for NewTodoItemView.xaml
+    /// Interaction logic for NewTodoItemDialog.xaml
     /// </summary>
-    public partial class NewTodoItemView : UserControl
+    public partial class NewTodoItemDialog : Window
     {
-        public NewTodoItemView()
+        public NewTodoItemDialog(ControllerViewModel dataContext)
         {
             InitializeComponent();
-        }
-
-        private void NewTodoItemView_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            this.TodoTypeSelector.Focus();
+            this.DataContext = dataContext;
         }
     }
 }
